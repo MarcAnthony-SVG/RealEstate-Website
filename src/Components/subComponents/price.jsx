@@ -1,6 +1,5 @@
 import React from "react";
 import { Dropdown, DropdownButton } from "react-bootstrap";
-import { concat } from "../../Data/Properties";
 const ForSale = (props) => {
   return (
     <div>
@@ -9,10 +8,10 @@ const ForSale = (props) => {
       <div className="flex-container">
         <div className="MinPrice">
           <Dropdown>
-            <DropdownButton id="dropdown-basic-button" title="Min Price">
+            <DropdownButton id="dropdown-basic-button" title={props.PriceMin}>
               <Dropdown.Item
                 as="button"
-                onClick={props.selectMinPrice}
+                onClick={()=>{console.log("Price", props.PriceMin)}}
                 value="Any Price"
               >
                 Any Price
@@ -72,7 +71,7 @@ const ForSale = (props) => {
         <h4> - </h4>
         <div className="MaxPrice">
           <Dropdown>
-            <DropdownButton id="dropdown-basic-button" title="Max Price">
+            <DropdownButton id="dropdown-basic-button" title={props.PriceMax}>
               $ No Max
               <Dropdown.Item
                 as="button"

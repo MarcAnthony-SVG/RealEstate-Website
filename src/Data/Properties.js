@@ -1,17 +1,19 @@
 let properties = [
   {
-    id: 1,
-    image: "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
+    property_id: "4911807819",
+    prop_type: "single_family",
+    photo:
+      "https://ap.rdcpix.com/32bf311809843eee3a1bce032b6a3982l-m425140880x.jpg",
     price: "$200,000",
-    beds: "3",
-    baths: "2",
-    sqft: "1400",
-    address: "name",
-    city: "San Antonio",
+    beds: 3,
+    baths: 1,
+    sqft: "1,185 sq ft",
+    address: "9718 Avenue L in Canarsie, Brooklyn, 11236",
   },
   {
     id: 2,
-    image: "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
+    image:
+      "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
     price: "$200,000",
     beds: "2",
     baths: "1",
@@ -21,7 +23,8 @@ let properties = [
   },
   {
     id: 3,
-    image: "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
+    image:
+      "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
     price: "$200,000",
     beds: "1",
     baths: "1",
@@ -31,7 +34,8 @@ let properties = [
   },
   {
     id: 4,
-    image: "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
+    image:
+      "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
     price: "$200,000",
     beds: "4",
     baths: "2",
@@ -41,7 +45,8 @@ let properties = [
   },
   {
     id: 5,
-    image: "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
+    image:
+      "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
     price: "$200,000",
     beds: "4",
     baths: "3",
@@ -51,7 +56,8 @@ let properties = [
   },
   {
     id: 6,
-    image: "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
+    image:
+      "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
     price: "$200,000",
     beds: "3",
     baths: "2",
@@ -61,7 +67,8 @@ let properties = [
   },
   {
     id: 7,
-    image: "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
+    image:
+      "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
     price: "$200,000",
     beds: "2",
     baths: "1",
@@ -71,7 +78,8 @@ let properties = [
   },
   {
     id: 8,
-    image: "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
+    image:
+      "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
     price: "$200,000",
     beds: "3",
     baths: "2",
@@ -81,7 +89,8 @@ let properties = [
   },
   {
     id: 9,
-    image: "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
+    image:
+      "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
     price: "$200,000",
     beds: "4",
     baths: "3",
@@ -91,7 +100,8 @@ let properties = [
   },
   {
     id: 10,
-    image: "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
+    image:
+      "https://www.netclipart.com/pp/m/78-789116_house-the-clip-art-at-clker-com-cartoon.png",
     price: "$200,000",
     beds: "5",
     baths: "3",
@@ -100,4 +110,4 @@ let properties = [
     city: "San Antonio",
   },
 ];
-module.exports = properties ;
+module.exports = properties;

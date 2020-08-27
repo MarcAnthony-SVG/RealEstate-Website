@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Navbar,
   Nav,
@@ -12,95 +13,29 @@ import Price from "./subComponents/price";
 import BedsAndBath from "./subComponents/bed&Bath";
 import HomeType from "./subComponents/homeType";
 import More from "./subComponents/more";
-import axios from "axios";
 
 class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      offset: "0", //Don't Change
-      city: undefined, //Change by user
-      state_code: undefined, //Change by user
-      limit: "40", //Don't Change
-      price_min: undefined, //Change by user
-      price_max: undefined, //Change by user
-      sqft_min: undefined, //Change by user
-      sqft_max: undefined, //Change by user
-      baths_min: undefined, //Change by user
-      baths_max: undefined, //Change by user
-    };
-    this.inputCityName = this.inputCityName.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.selectMinPrice = this.selectMinPrice.bind(this);
-    this.selectMaxPrice = this.selectMaxPrice.bind(this);
+  constructor() {
+    super();
+    this.state = {};
   }
-  inputCityName = (e) => {
-    this.setState({ city: e.target.value });
-  };
-  selectMinPrice = (e) => {
-    this.setState({ price_min: e.target.value });
-  };
-  selectMaxPrice = (e) => {
-    this.setState({ price_max: e.target.value });
-  };
-  selectMinSQFT = (e) => {
-    this.setState({ price_min: e.target.value });
-  };
-  selectMaxSQFT = (e) => {
-    this.setState({ price_max: e.target.value });
-  };
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.state);
-    axios
-      .post(
-        "https://realtor.p.rapidapi.com/properties/list-for-sale",
-        this.state
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  // getPropertyInformation() {
-  //   let price_min = this.state.price_min;
-  //   let price_max = this.state.price_max;
-  //   let sqft_min = this.state.sqft_min;
-  //   let sqft_max = this.state.sqft_max;
-  //   let baths_min = this.state.baths_min;
-  //   let baths_max = this.state.baths_max;
-  //   axios
-  //     .get("http://localhost:3001/api/Mentor", {
-  //       price_min,
-  //       price_max,
-  //       sqft_min,
-  //       sqft_max,
-  //       baths_min,
-  //       baths_max,
-  //     })
-  //     .then((res) => {
-  //       console.log("front end post works");
-  //       this.getPropertyInformation();
-  //     })
-  //     .catch((err) => {
-  //       console.log("error on post frontend");
-  //     });
-  // }
-  render() {
+
+  render(props) {
     return (
       <Navbar bg="light" expand="lg">
-        <Form onSubmit={this.handleSubmit} inline>
+        <Form onSubmit={this.props.getPropertiesByCity} inline>
           <FormControl
-            onChange={this.inputCityName}
-            value={this.state.city}
+            onChange={this.props.inputCityName}
+            value={this.props.NavBarOptions.SearchedCity}
             type="text"
             placeholder="Search"
             className="mr-sm-2"
             TEST={console.log("State", this.state)}
           />
-          <Button onClick={this.handleSubmit} variant="outline-success">
+          <Button
+            onClick={this.props.getPropertiesByCity}
+            variant="outline-success"
+          >
             Search
           </Button>
         </Form>
@@ -111,16 +46,26 @@ class NavBar extends React.Component {
               <ForSale></ForSale>
             </NavDropdown>
             <NavDropdown title="Price" id="basic-nav-dropdown">
-              <Price selectMinPrice={this.selectMinPrice} selectMaxPrice={this.selectMaxPrice}></Price>
+              <Price
+                PriceMin={this.props.NavBarOptions.PriceMin}
+                PriceMax={this.props.NavBarOptions.PriceMax}
+                selectMinPrice={this.props.selectMinPrice}
+                selectMaxPrice={this.props.selectMaxPrice}
+              ></Price>
             </NavDropdown>
             <NavDropdown title="Beds & Bath" id="basic-nav-dropdown">
-              <BedsAndBath></BedsAndBath>
+              <BedsAndBath
+                selectMinBath={this.selectMinBath}
+                selectMaxBath={this.selectMaxBath}
+              ></BedsAndBath>
             </NavDropdown>
             <NavDropdown title="Home Type" id="basic-nav-dropdown">
-              <HomeType></HomeType>
+              <HomeType
+                selectBuildingTypeId={this.props.selectBuildingTypeId}
+              ></HomeType>
             </NavDropdown>
             <NavDropdown title="More" id="basic-nav-dropdown">
-              <More></More>
+              <More setOpenHouse={this.props.setOpenHouse}></More>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
@@ -128,5 +73,10 @@ class NavBar extends React.Component {
     );
   }
 }
+NavBar.propTypes = {
+  getPropertiesByCity: PropTypes.func,
+  inputCityName: PropTypes.func,
+  SearchedCity: PropTypes.string,
+};
 
 export default NavBar;

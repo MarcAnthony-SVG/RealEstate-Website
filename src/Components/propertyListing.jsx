@@ -1,36 +1,63 @@
 import React from "react";
 import Property from "./subComponents/property";
-import properties from "../Data/Properties";
-import axios from "axios";
+import { Dropdown, DropdownButton } from "react-bootstrap";
+
+// import axios from "axios";
 import "../css/PropertyListings.css";
 
 class PropertyListings extends React.Component {
-  state = {
-    Results: properties.length,
-    Data: properties,
-    sort: "sold_date", //Change by user
-    city: "New York City", //Change by user
-    Location: properties[0].city, // SWAP WITH CITY WHEN API IS CONNECTED
-    
-  };
- getUser() {
-  axios.get('https://realtor.p.rapidapi.com/properties/list-for-sale')
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
- }
+  state = {};
+
   render() {
     return (
-      <div className="ListingsBox">
-        <div> {this.state.Location} Real Estate & Homes For Sale</div>
-        <div>{this.state.Results} results</div>
-        <div>Sort By:</div>
-
-        <Property data={this.state.Data}
-        onClick={this.getUser}></Property>
+      <div
+        style={{
+          border: "2.4px solid black",
+          width: "45vw",
+          height: "70.9vh",
+          overflow: "auto",
+        }}
+      >
+        <div> {this.props.City} Real Estate & Homes For Sale</div>
+        <div>{this.props.PropertiesData.length} results</div>
+        <Dropdown>
+          <DropdownButton id="dropdown-basic-button" title="Sort By">
+            <Dropdown.Item as="button" onClick={this.props.setSortBy} value="1">
+              Price
+            </Dropdown.Item>
+            <Dropdown.Item as="button" onClick={this.props.setSortBy} value="6">
+              Date
+            </Dropdown.Item>
+            <Dropdown.Item
+              as="button"
+              onClick={this.props.setSortBy}
+              value="11"
+            >
+              Virtual Tour
+            </Dropdown.Item>
+            <Dropdown.Item
+              as="button"
+              onClick={this.props.setSortBy}
+              value="12"
+            >
+              Open Houses
+            </Dropdown.Item>
+            <Dropdown.Item
+              as="button"
+              onClick={this.props.setSortBy}
+              value="13"
+            >
+              More Photos
+            </Dropdown.Item>
+          </DropdownButton>
+        </Dropdown>
+        <Property
+          PropertiesData={this.props.PropertiesData}
+          onClick={console.log(
+            "propertyListings > onClick",
+            this.props.PropertiesData
+          )}
+        ></Property>
       </div>
     );
   }

@@ -1,11 +1,11 @@
-.ListingsBox {
+/* .ListingsBox {
   width: 50%;
   height: 830px;
   border: 2px solid black;
   overflow: auto;
 
-  
-}
+   */
+/* }/ */
 .PropertiesContainer {
     display: flex;
     flex-wrap: wrap;
@@ -13,8 +13,9 @@
 }
 .Properties {
     background-color: #f1f1f1;
-    width: 145px;
-    margin: 10px;
+    width: 200px;
+    height: 170px;
+    margin: 20px;
     line-height: 10px;
     font-size: 10px;
 }
