@@ -6,6 +6,13 @@ import axios from "axios";
 import PropertyListings from "./Components/propertyListing";
 // import DummyData from "./Data/Data";
 
+
+// import Navbar from "./Components/Layout/Navbar";
+// import { BrowserRouter as Router, Route } from "react-router-dom";
+// import Footer from "./Components/Layout/Footer";
+// import Home from "./Components/Layout/Home";
+// import Social from "./Components/social/Social";
+
 class App extends Component {
   constructor() {
     super();
@@ -43,6 +50,7 @@ class App extends Component {
         SortOrder: "A", //A - ascending | D - descending
       },
     };
+    this.connectToServer = this.connectToServer.bind(this);
 
     this.inputCityName = this.inputCityName.bind(this);
     this.setOpenHouse = this.setOpenHouse.bind(this);
@@ -55,7 +63,12 @@ class App extends Component {
     this.viewState = this.viewState.bind(this);
     this.getRealEstateData = this.getRealEstateData.bind(this);
   }
-
+  connectToServer() {
+    fetch("/");
+  }
+  componentDidMount() {
+    this.connectToServer();
+  }
   getRealEstateData = (e) => {
     axios({
       method: "GET",
@@ -222,6 +235,12 @@ class App extends Component {
     //   return <div>Loading...</div>;
     // } else {
     return (
+      //  <Router>
+      //   <div className="container">
+      //     <Navbar /> <Route exact path="/" component={Home} />
+      //     <Route exact path="/social" component={Social} /> <Footer />
+      //   </div>
+      // </Router>
       <div>
         <NavBar
           NavBarOptions={this.state.NavBarOptions}

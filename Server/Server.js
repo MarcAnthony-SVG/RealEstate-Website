@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3006;
+const path = require("path");
+const port = process.env.PORT || 5001;
 const request = require("request");
 const { json } = require("express");
 const router = express.Router();
@@ -8,9 +9,22 @@ const cors = require("cors");
 // app.get("", (req, res) => {
 //   res.send("Hello World!");
 // });
-app.use(express.json())
+app.use(express.json());
 app.use(cors());
 app.use(express.json());
+// app.get('/', (req, res) => {    res.send('root route');
+// // })
+// app.listen(port, (req, res) => {
+// //   console.log(`server listening on port: ${port}`)
+// // });
+// app.use(express.static(path.join(__dirname, "/build")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "/build")));
+// }else{
+//   app.get("*", (req, res) => {
+//     res.sendfile(path.join((__dirname = "/index.html")));
+//   });
+// }
 
 var options = {
   method: "GET",
@@ -50,8 +64,7 @@ app.get("/api/properties/list-for-sale", (req, res) => {
     console.log(body);
     res.send(body);
   });
-  console.log("REQ",req.query)
-  
+  console.log("REQ", req.query);
 });
 
 app.listen(port, () => {
