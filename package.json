@@ -29,6 +29,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "package-name": "^0.1.0",
     "request": "^2.88.2"
   },
   "devDependencies": {
