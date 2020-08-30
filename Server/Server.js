@@ -6,32 +6,32 @@ const request = require("request");
 const { json } = require("express");
 const router = express.Router();
 const cors = require("cors");
-const cluster = require("cluster");
-const numCPUs = require("os").cpus().length;
-const isDev = process.env.NODE_ENV !== "production";
+// const cluster = require("cluster");
+// const numCPUs = require("os").cpus().length;
+// const isDev = process.env.NODE_ENV !== "production";
 
 app.use(express.json());
 app.use(cors());
 app.use(express.json());
-// Multi-process to utilize all CPU cores.
-if (!isDev && cluster.isMaster) {
-  console.error(`Node cluster master ${process.pid} is running`);
+// // Multi-process to utilize all CPU cores.
+// if (!isDev && cluster.isMaster) {
+//   console.error(`Node cluster master ${process.pid} is running`);
 
-  // Fork workers.
-  for (let i = 0; i < numCPUs; i++) {
-    cluster.fork();
-  }
+//   // Fork workers.
+//   for (let i = 0; i < numCPUs; i++) {
+//     cluster.fork();
+//   }
 
-  cluster.on("exit", (worker, code, signal) => {
-    console.error(
-      `Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`
-    );
-  });
-} else {
-  const app = express();
-  // Priority serve any static files.
-  app.use(express.static(path.resolve(__dirname, "./Front_End/build")));
-}
+//   cluster.on("exit", (worker, code, signal) => {
+//     console.error(
+//       `Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`
+//     );
+//   });
+// } else {
+//   const app = express();
+//   // Priority serve any static files.
+//   app.use(express.static(path.resolve(__dirname, "./Front_End/build")));
+// }
 var options = {
   method: "GET",
   url:
