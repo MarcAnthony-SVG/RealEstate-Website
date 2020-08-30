@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node Server/Server.js ",
+    "start": "nodemon Server/Server.js ",
     "build": "cd Front_End/ && npm install && npm run build"
   },
   "cacheDirectories": [

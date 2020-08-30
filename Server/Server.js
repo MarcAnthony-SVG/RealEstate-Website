@@ -39,7 +39,7 @@ if (!isDev && cluster.isMaster) {
   });
 
   // All remaining requests return the React app, so it can handle routing.
-  app.get('*', function(request, response) {
+  app.get('/*', function(request, response) {
     response.sendFile(path.resolve(__dirname, '../Front_End/build', 'index.html'));
   });
 }
