@@ -22,15 +22,26 @@ if (!isDev && cluster.isMaster) {
     cluster.fork();
   }
 
-  cluster.on("exit", (worker, code, signal) => {
-    console.error(
-      `Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`
-    );
+  cluster.on('exit', (worker, code, signal) => {
+    console.error(`Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`);
   });
+
 } else {
   const app = express();
+
   // Priority serve any static files.
-  app.use(express.static(path.resolve(__dirname, "./Front_End/build")));
+  app.use(express.static(path.resolve(__dirname, '../Front_End/build')));
+
+  // Answer API requests.
+  app.get('/api', function (req, res) {
+    res.set('Content-Type', 'application/json');
+    res.send('{"message":"Hello from the custom server!"}');
+  });
+
+  // All remaining requests return the React app, so it can handle routing.
+  app.get('*', function(request, response) {
+    response.sendFile(path.resolve(__dirname, '../Front_End/build', 'index.html'));
+  });
 }
 var options = {
   method: "GET",
