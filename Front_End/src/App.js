@@ -72,7 +72,7 @@ class App extends Component {
   getRealEstateData = (e) => {
     axios({
       method: "GET",
-      url: "http://localhost:3006/api/properties/list-for-sale",
+      url: "http://localhost:5001/api/properties/list-for-sale",
       params: {
         CurrentPage: "1", //REQUIRED
         RecordsPerPage: "10", // REQUIRED Number items returned per request, max 50

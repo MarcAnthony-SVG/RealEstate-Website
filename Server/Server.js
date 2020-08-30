@@ -1,31 +1,37 @@
 const express = require("express");
-const app = express();
 const path = require("path");
+const app = express();
 const port = process.env.PORT || 5001;
 const request = require("request");
 const { json } = require("express");
 const router = express.Router();
 const cors = require("cors");
-// app.get("", (req, res) => {
-//   res.send("Hello World!");
-// });
+const cluster = require("cluster");
+const numCPUs = require("os").cpus().length;
+const isDev = process.env.NODE_ENV !== "production";
+
 app.use(express.json());
 app.use(cors());
 app.use(express.json());
-// app.get('/', (req, res) => {    res.send('root route');
-// // })
-// app.listen(port, (req, res) => {
-// //   console.log(`server listening on port: ${port}`)
-// // });
-// app.use(express.static(path.join(__dirname, "/build")));
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "/build")));
-// }else{
-//   app.get("*", (req, res) => {
-//     res.sendfile(path.join((__dirname = "/index.html")));
-//   });
-// }
+// Multi-process to utilize all CPU cores.
+if (!isDev && cluster.isMaster) {
+  console.error(`Node cluster master ${process.pid} is running`);
 
+  // Fork workers.
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  cluster.on("exit", (worker, code, signal) => {
+    console.error(
+      `Node cluster worker ${worker.process.pid} exited: code ${code}, signal ${signal}`
+    );
+  });
+} else {
+  const app = express();
+  // Priority serve any static files.
+  app.use(express.static(path.resolve(__dirname, "./Front_End/build")));
+}
 var options = {
   method: "GET",
   url:
@@ -61,15 +67,27 @@ app.get("/api/properties/list-for-sale", (req, res) => {
   options.qs = req.query;
   request(options, function (error, response, body) {
     // const json = JSON.parse(body);
-    console.log(body);
+    console.log("API DATA:Body:Results", body.Results);
+    console.log("API DATA: Body", body);
     res.send(body);
   });
   console.log("REQ", req.query);
 });
-
+// All remaining requests return the React app, so it can handle routing.
+app.get("*", function (request, response) {
+  response.sendFile(
+    path.resolve(__dirname, "../Front_End/build", "index.html")
+  );
+});
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
+  console.error(
+    `Node ${
+      isDev ? "dev server" : "cluster worker " + process.pid
+    }: listening on port ${port}`
+  );
 });
+
 module.exports = app;
 /*
 The challenges that I faced while I created this server was calling a web api for the first time
