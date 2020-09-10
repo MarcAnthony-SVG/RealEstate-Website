@@ -16,7 +16,7 @@ app.use(express.json());
 // Multi-process to utilize all CPU cores.
 if (!isDev && cluster.isMaster) {
   console.error(`Node cluster master ${process.pid} is running`);
-
+   
   // Fork workers.
   for (let i = 0; i < numCPUs; i++) {
     cluster.fork();
