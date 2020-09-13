@@ -150,5 +150,8 @@
       "react-app"
     ]
   },
-  "proxy": "http://localhost:5001"
+  "proxy": "http://localhost:5001",
+
+  "homepage": "https://real-estate-website.vercel.app/"
+
 }
